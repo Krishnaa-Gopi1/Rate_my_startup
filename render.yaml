@@ -1,0 +1,24 @@
+# One-click Render Blueprint for the StartupJudge / Startup Roast backend.
+# Frontend deploys separately on Vercel (see README).
+#
+# After clicking "Deploy to Render" from the README, you'll be prompted for
+# the secrets marked `sync: false` below.
+
+services:
+  - type: web
+    name: rate-my-startup-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false   # you'll paste this in the Render UI
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: ALLOWED_ORIGIN_REGEX
+        value: 'https://.*\.vercel\.app'
+      - key: ALLOWED_ORIGINS
+        sync: false   # set this to your Vercel production URL after first deploy

@@ -16,10 +16,12 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 app = FastAPI(title="StartupJudge AI", version="0.1.0")
 
 origins = [o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000").split(",") if o.strip()]
+origin_regex = os.environ.get("ALLOWED_ORIGIN_REGEX")  # e.g. https://.*\.vercel\.app
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_origin_regex=origin_regex,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
