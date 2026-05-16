@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    background: #f4ead0;
+    color: #1a1612;
+    min-height: 100vh;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    /* Subtle paper grain via two overlapping noise/dot patterns */
+    background-color: #f4ead0;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(26, 22, 18, 0.04) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(26, 22, 18, 0.025) 1px, transparent 1px);
+    background-size: 8px 8px, 12px 12px;
+  }
+
+  ::selection {
+    background: #ffd44d;
+    color: #1a1612;
+  }
+}
+
+@layer components {
+  /* ── Borders & cards ─────────────────────────────────────── */
+  .frame {
+    @apply border-[3px] border-ink rounded-lg bg-paper-cream;
+    box-shadow: 5px 5px 0 #1a1612;
+  }
+
+  .frame-sm {
+    @apply border-[2.5px] border-ink rounded-lg bg-paper-cream;
+    box-shadow: 3px 3px 0 #1a1612;
+  }
+
+  .frame-flat {
+    @apply border-[3px] border-ink rounded-lg bg-paper-cream;
+  }
+
+  .frame-yellow {
+    @apply border-[3px] border-ink rounded-lg;
+    background: #ffd44d;
+    box-shadow: 5px 5px 0 #1a1612;
+  }
+
+  /* ── Typography ──────────────────────────────────────────── */
+  .heading {
+    font-family: 'Archivo Black', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+
+  .display {
+    font-family: 'Bowlby One SC', 'Archivo Black', sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+  }
+
+  .type {
+    font-family: 'Special Elite', 'Courier New', monospace;
+  }
+
+  /* Big chunky number with yellow fill + black outline */
+  .number-big {
+    font-family: 'Archivo Black', sans-serif;
+    color: #f0b929;
+    -webkit-text-stroke: 2px #1a1612;
+    text-stroke: 2px #1a1612;
+    text-shadow: 3px 3px 0 #1a1612;
+    line-height: 1;
+  }
+
+  /* Yellow highlight behind text */
+  .highlight-yellow {
+    background: linear-gradient(180deg, transparent 35%, #ffd44d 35%, #ffd44d 95%, transparent 95%);
+    padding: 0 0.15em;
+  }
+
+  /* ── Buttons ────────────────────────────────────────────── */
+  .btn-roast {
+    @apply inline-flex items-center justify-center border-[3px] border-ink rounded-lg font-heading uppercase tracking-wide transition-all;
+    background: #ffd44d;
+    color: #1a1612;
+    box-shadow: 4px 4px 0 #1a1612;
+    padding: 0.65rem 1.25rem;
+  }
+  .btn-roast:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 6px 6px 0 #1a1612;
+  }
+  .btn-roast:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #1a1612;
+  }
+  .btn-roast:disabled { @apply opacity-50 cursor-not-allowed; }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center border-[2.5px] border-ink rounded-lg font-heading uppercase tracking-wide transition-all;
+    background: transparent;
+    color: #1a1612;
+    padding: 0.45rem 0.9rem;
+  }
+  .btn-ghost:hover {
+    background: #ffd44d;
+  }
+
+  .nav-link {
+    @apply font-heading uppercase tracking-wider text-sm transition-colors;
+    color: #1a1612;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+  }
+  .nav-link:hover { background: rgba(255, 212, 77, 0.5); }
+  .nav-link.active {
+    background: #ffd44d;
+    border: 2px solid #1a1612;
+  }
+
+  /* ── Inputs ─────────────────────────────────────────────── */
+  .input-roast {
+    @apply w-full border-[3px] border-ink rounded-lg bg-paper-cream px-4 py-3 text-base font-body;
+    color: #1a1612;
+    transition: box-shadow 0.15s;
+  }
+  .input-roast:focus {
+    outline: none;
+    box-shadow: 4px 4px 0 #1a1612;
+  }
+  .input-roast::placeholder { color: #6e6253; font-style: italic; }
+
+  /* ── Halftones ──────────────────────────────────────────── */
+  .halftone {
+    background-image: radial-gradient(circle, #1a1612 1px, transparent 1.4px);
+    background-size: 6px 6px;
+  }
+  .halftone-soft {
+    background-image: radial-gradient(circle, rgba(26, 22, 18, 0.25) 1px, transparent 1.4px);
+    background-size: 6px 6px;
+  }
+
+  /* ── Difficulty pills ───────────────────────────────────── */
+  .pill {
+    @apply font-heading uppercase tracking-wide text-xs px-2.5 py-0.5 rounded-full border-2 border-ink;
+  }
+  .pill-easy      { background: #c5e8a6; }
+  .pill-medium    { background: #ffd44d; }
+  .pill-hard      { background: #f5a35c; }
+  .pill-nightmare { background: #e85d3a; color: #faf3dc; }
+
+  /* ── Speech bubble ──────────────────────────────────────── */
+  .bubble {
+    position: relative;
+    background: #ffd44d;
+    border: 3px solid #1a1612;
+    border-radius: 18px;
+    padding: 0.6rem 1rem;
+    font-family: 'Archivo Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 16px solid #1a1612;
+  }
+  .bubble::before {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    left: 31px;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 12px solid #ffd44d;
+    z-index: 1;
+  }
+
+  /* ── Slider track (decorative, for difficulty meter) ────── */
+  .slider-track {
+    @apply relative h-2 rounded-full border-2 border-ink;
+    background: #faf3dc;
+  }
+  .slider-knob {
+    @apply absolute -top-2 w-5 h-5 rounded-full border-[3px] border-ink;
+    background: #ffd44d;
+    transform: translateX(-50%);
+  }
+}
+
+/* Scrollbar - retro */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f4ead0; border-left: 2px solid #1a1612; }
+::-webkit-scrollbar-thumb { background: #1a1612; border: 2px solid #f4ead0; border-radius: 0; }
