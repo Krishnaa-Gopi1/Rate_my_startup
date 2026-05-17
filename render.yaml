@@ -1,5 +1,5 @@
 # One-click Render Blueprint for the StartupJudge / Startup Roast backend.
-# Frontend deploys separately on Vercel (see README).
+# Frontend deploys separately on Netlify (see README).
 #
 # After clicking "Deploy to Render" from the README, you'll be prompted for
 # the secrets marked `sync: false` below.
@@ -21,6 +21,6 @@ services:
       - key: GROQ_MODEL
         value: llama-3.3-70b-versatile
       - key: ALLOWED_ORIGIN_REGEX
-        value: 'https://.*\.vercel\.app'
+        value: 'https://.*\.netlify\.app'
       - key: ALLOWED_ORIGINS
-        sync: false   # set this to your Vercel production URL after first deploy
+        sync: false   # set this to your Netlify production URL after first deploy

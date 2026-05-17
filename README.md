@@ -45,7 +45,7 @@ Open <http://localhost:3000>.
 
 ## Deployment (5-minute walkthrough)
 
-The standard stack: **Render for the backend, Vercel for the frontend**. Both have free tiers.
+The standard stack: **Render for the backend, Netlify for the frontend**. Both have free tiers.
 
 ### Step 1 — Deploy the backend to Render
 
@@ -54,29 +54,29 @@ The standard stack: **Render for the backend, Vercel for the frontend**. Both ha
 3. Select this repo. Render reads `render.yaml` and proposes one service: `rate-my-startup-api`.
 4. When prompted for secrets:
    - `GROQ_API_KEY` — paste your key from <https://console.groq.com/keys>
-   - `ALLOWED_ORIGINS` — set to `https://your-app.vercel.app` (you'll get this URL in Step 2; you can leave blank for now and come back)
+   - `ALLOWED_ORIGINS` — set to `https://your-app.netlify.app` (you'll get this URL in Step 2; you can leave blank for now and come back)
 5. Click **Apply**. Wait ~2 minutes for the build + deploy.
 6. Copy the live URL — looks like `https://rate-my-startup-api.onrender.com`. Verify `/health` returns `{"status":"ok","groq_configured":true}`.
 
 **Note on cold starts:** Render's free tier sleeps after 15 min of inactivity. First request after sleep takes ~30s.
 
-### Step 2 — Deploy the frontend to Vercel
+### Step 2 — Deploy the frontend to Netlify
 
-1. Sign in to <https://vercel.com> with GitHub.
-2. Click **Add New… → Project**, import this repo.
-3. **Root Directory:** set to `frontend`.
-4. **Environment Variables:** add one
-   - `NEXT_PUBLIC_API_URL` = the Render URL from Step 1 (e.g. `https://rate-my-startup-api.onrender.com`)
-5. Click **Deploy**. Wait ~1 minute.
-6. Copy the Vercel URL — looks like `https://rate-my-startup.vercel.app`.
+1. Sign in to <https://app.netlify.com> with GitHub.
+2. Click **Add new site → Import an existing project**, select GitHub, then choose this repo.
+3. Netlify will auto-detect the config from `netlify.toml` (base: `frontend`, build: `npm run build`).
+4. **Environment Variables:** click **Show advanced** → **New variable**
+   - `NEXT_PUBLIC_API_URL` = the Render URL from Step 1 (e.g. `https://rate-my-startup-api.onrender.com`) — no trailing slash!
+5. Click **Deploy**. Wait ~1-2 minutes.
+6. Copy the Netlify URL — looks like `https://rate-my-startup.netlify.app`.
 
 ### Step 3 — Wire CORS
 
-Go back to your Render service → **Environment** tab → update `ALLOWED_ORIGINS` to your Vercel URL from Step 2 → save. Render redeploys automatically.
+Go back to your Render service → **Environment** tab → update `ALLOWED_ORIGINS` to your Netlify URL from Step 2 → save. Render redeploys automatically.
 
-`render.yaml` already sets `ALLOWED_ORIGIN_REGEX=https://.*\.vercel\.app`, so all Vercel preview URLs work out of the box. `ALLOWED_ORIGINS` is just for the production domain (and any custom domain you add later).
+`render.yaml` already sets `ALLOWED_ORIGIN_REGEX=https://.*\.netlify\.app`, so all Netlify preview URLs work out of the box. `ALLOWED_ORIGINS` is just for the production domain (and any custom domain you add later).
 
-Done. Open the Vercel URL and roast something.
+Done. Open the Netlify URL and roast something.
 
 ---
 
@@ -124,7 +124,7 @@ Returns scores (rule-based) + a final verdict (AI-generated):
 | `GROQ_API_KEY` | for AI verdicts | — | Falls back to a hardcoded verdict if unset |
 | `GROQ_MODEL` | no | `llama-3.3-70b-versatile` | Any Groq chat model |
 | `ALLOWED_ORIGINS` | yes (prod) | `http://localhost:3000` | Comma-separated list |
-| `ALLOWED_ORIGIN_REGEX` | no | — | e.g. `https://.*\.vercel\.app` for preview deploys |
+| `ALLOWED_ORIGIN_REGEX` | no | — | e.g. `https://.*\.netlify\.app` for preview deploys |
 
 ## Phase 2 / Phase 3 (not yet built)
 

@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 app = FastAPI(title="StartupJudge AI", version="0.1.0")
 
 origins = [o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000").split(",") if o.strip()]
-origin_regex = os.environ.get("ALLOWED_ORIGIN_REGEX")  # e.g. https://.*\.vercel\.app
+origin_regex = os.environ.get("ALLOWED_ORIGIN_REGEX")  # e.g. https://.*\.netlify\.app
 
 app.add_middleware(
     CORSMiddleware,
