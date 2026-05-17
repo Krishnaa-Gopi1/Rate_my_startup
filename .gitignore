@@ -1,6 +1,10 @@
 # Claude Code local settings
 .claude/settings.local.json
 
+# Environment
+.env.local
+.env*.local
+
 # Editor / OS
 .DS_Store
 Thumbs.db
